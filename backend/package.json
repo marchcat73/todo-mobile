@@ -2,15 +2,24 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "exports": "./dist/index.js",
+  "engines": {
+    "node": ">=14.16"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon",
+    "build": "tsc",
+    "start": "npm run build && node --require dotenv/config ./dist/index.js",
+    "format": "prettier --write **/*.{js,ts,tsx}",
+    "lint": "eslint . --ext ts --ext tsx --ext js",
+    "lint:fix": "eslint --debug **/*.{ts,tsx,js} --fix"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "VV",
+  "license": "MIT",
   "type": "module",
   "dependencies": {
+    "@apollo/client": "^3.8.10",
     "@apollo/server": "^4.10.0",
     "@graphql-tools/schema": "^10.0.2",
     "body-parser": "^1.20.2",

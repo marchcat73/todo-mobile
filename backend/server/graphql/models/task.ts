@@ -1,5 +1,9 @@
 import { Model, isValidObjectId } from 'mongoose';
-import { TaskFields, TaskResponse, StatusTypes } from '@app/interfaces';
+import {
+  TaskFields,
+  TaskResponse,
+  StatusTypes,
+} from '@app/interfaces/index.js';
 
 class Task {
   [x: string]: any;
