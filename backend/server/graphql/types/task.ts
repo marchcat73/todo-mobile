@@ -5,9 +5,9 @@ const TaskFields = `
 
 export const taskTypes = `
   enum StatusTypes {
-    Completed,
-    InProgress,
-    Active,
+    completed,
+    inProgress,
+    active,
   }
 
   input TaskInput {
@@ -17,8 +17,9 @@ export const taskTypes = `
 
   input TaskUpdateInput {
     _id: ID!
-    ${TaskFields}
-    status: StatusTypes!
+    name: String
+    taskDate: String
+    status: StatusTypes
   }
 
   input TaskDeleteInput {

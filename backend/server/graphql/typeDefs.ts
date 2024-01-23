@@ -7,21 +7,21 @@ export const typeDefs = gql`
   type Query {
     tasks: [TaskResponse]
     tasksFilter(status: StatusTypes): [TaskResponse]
-    taskById(id: ID!): TaskResponse
+    taskById(_id: ID!): TaskResponse
   }
 
-  type Mutations {
+  type Mutation {
     createTask(
       name: String!
       taskDate: String!
       status: StatusTypes!
     ): TaskResponse!
     updateTask(
-      id: ID!
-      name: String!
-      taskDate: String!
-      status: StatusTypes!
+      _id: ID!
+      name: String
+      taskDate: String
+      status: StatusTypes
     ): TaskResponse!
-    deleteTask(id: ID!): Boolean
+    deleteTask(_id: ID!): Boolean
   }
 `;

@@ -1,10 +1,10 @@
-import { tasksMutations, tasksQueris } from './task.resolver.js';
+import { tasksMutation, tasksQuery } from './task.resolver.js';
 
 export const resolvers = {
   Query: {
-    ...tasksQueris,
+    ...tasksQuery,
   },
-  Mutations: {
-    ...tasksMutations,
+  Mutation: {
+    ...tasksMutation,
   },
 };
