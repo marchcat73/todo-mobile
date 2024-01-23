@@ -1,13 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native';
 import { useQuery } from '@apollo/client';
 import { GET_TASKS_LIST } from '../apollo/queries/tasks';
+import TasksOutput from '../components/TasksOutput/TasksOutput';
 
 const AllTasks = () => {
-  const { data } = useQuery(GET_TASKS_LIST);
-
+  const { loading, error, data } = useQuery(GET_TASKS_LIST);
   const tasks = (data && data.tasks) || [];
-
-  return <Text>AllTasks Screen</Text>;
+  return <TasksOutput loading={loading} error={error} tasks={tasks} />;
 };
 
 export default AllTasks;
