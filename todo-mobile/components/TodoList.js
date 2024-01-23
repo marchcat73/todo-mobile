@@ -8,7 +8,6 @@ import {
   TextInput,
 } from 'react-native';
 import { useQuery, gql } from '@apollo/client';
-// import { useGetTasksList } from '../apollo/actions';
 import Todo from './Todo';
 
 const TodoList = () => {
