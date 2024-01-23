@@ -1,17 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+import { GET_TASKS_LIST } from '../apollo/queries/tasks';
 
 const AllTasks = () => {
-  const GET_TASKS_LIST = gql`
-    query Tasks {
-      tasks {
-        _id
-        name
-        status
-        taskDate
-      }
-    }
-  `;
   const { data } = useQuery(GET_TASKS_LIST);
 
   const tasks = (data && data.tasks) || [];
