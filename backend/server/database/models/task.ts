@@ -13,7 +13,7 @@ const taskSchema = new Schema(
       required: true,
     },
     status: {
-      enum: ['completed', 'in progress', 'active'],
+      enum: ['completed', 'inProgress', 'active'],
       type: String,
       default: 'active',
     },

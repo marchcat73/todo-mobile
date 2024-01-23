@@ -9,13 +9,25 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.10",
+    "@expo/metro-runtime": "^3.1.1",
+    "@react-native-async-storage/async-storage": "^1.21.0",
+    "@react-navigation/native": "^6.1.9",
+    "@react-navigation/native-stack": "^6.9.17",
+    "apollo3-cache-persist": "^0.14.1",
     "expo": "~50.0.2",
     "expo-status-bar": "~1.11.1",
+    "graphql": "^16.8.1",
     "react": "18.2.0",
-    "react-native": "0.73.2"
+    "react-dom": "18.2.0",
+    "react-native": "0.73.2",
+    "react-native-fetch-api": "^3.0.0",
+    "react-native-polyfill-globals": "^3.1.0",
+    "react-native-web": "~0.19.10"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.23.7",
+    "prettier": "^3.2.4"
   },
   "private": true
 }

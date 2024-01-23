@@ -1,7 +1,12 @@
 import { GraphQLError } from 'graphql';
-import { StatusTypes, TaskFields, TaskResponse } from '@app/interfaces';
+import {
+  StatusTypes,
+  TaskFields,
+  TaskResponse,
+  TaskUpdateArgs,
+} from '@app/interfaces';
 
-export const tasksQueris = {
+export const tasksQuery = {
   tasks: async (
     _root: undefined,
     _args,
@@ -42,7 +47,7 @@ export const tasksQueris = {
   },
 };
 
-export const tasksMutations = {
+export const tasksMutation = {
   createTask: async (
     _root: undefined,
     { name, taskDate, status }: TaskFields,
@@ -68,7 +73,7 @@ export const tasksMutations = {
 
   updateTask: async (
     _root: undefined,
-    { _id, name, taskDate, status }: TaskResponse,
+    { _id, name, taskDate, status }: TaskUpdateArgs,
     ctx,
     _info,
   ): Promise<TaskResponse> => {

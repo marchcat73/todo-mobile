@@ -1,7 +1,7 @@
 export enum StatusTypes {
-  Completed = 'Completed',
-  InProgress = 'InProgress',
-  Active = 'Active',
+  completed = 'completed',
+  inProgress = 'inProgress',
+  active = 'active',
 }
 
 export interface TaskFields {
@@ -16,4 +16,11 @@ export interface ICreateTaskInput {
 
 export interface TaskResponse extends TaskFields {
   _id: string;
+}
+
+export interface TaskUpdateArgs {
+  _id: string;
+  name?: string;
+  taskDate?: string;
+  status?: StatusTypes;
 }

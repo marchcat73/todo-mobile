@@ -1,8 +1,8 @@
 import { Model, isValidObjectId } from 'mongoose';
 import {
+  StatusTypes,
   TaskFields,
   TaskResponse,
-  StatusTypes,
 } from '@app/interfaces/index.js';
 
 class Task {
