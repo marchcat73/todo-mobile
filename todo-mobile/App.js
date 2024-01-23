@@ -5,10 +5,16 @@ import { polyfill as polyfillEncoding } from 'react-native-polyfill-globals/src/
 import { polyfill as polyfillReadableStream } from 'react-native-polyfill-globals/src/readable-stream';
 import { polyfill as polyfillFetch } from 'react-native-polyfill-globals/src/fetch';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { cache } from './cache';
 import baseUrl from './assets/common/baseUrl';
-import TodoList from './components/TodoList';
+import ManageTask from './screens/ManageTask';
+import ActiveTasks from './screens/ActiveTasks';
+import AllTasks from './screens/AllTasks';
+import CompletedTasks from './screens/CompletedTasks';
+import InProgressTasks from './screens/InProgressTasks';
 
 // polyfillReadableStream();
 // polyfillEncoding();
@@ -37,20 +43,30 @@ import TodoList from './components/TodoList';
 //   defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } },
 // });
 
+const Stack = createNativeStackNavigator();
+const BottomTabs = createBottomTabNavigator();
+
+const TasksOverview = () => {
+  return (
+    <BottomTabs.Navigator>
+      <BottomTabs.Screen name="ActiveTasks" component={ActiveTasks} />
+      <BottomTabs.Screen name="CompletedTasks" component={CompletedTasks} />
+      <BottomTabs.Screen name="InProgressTasks" component={InProgressTasks} />
+      <BottomTabs.Screen name="AllTasks" component={AllTasks} />
+    </BottomTabs.Navigator>
+  );
+};
+
 export default function App() {
   return (
-    <View style={styles.container}>
-      <TodoList />
+    <>
       <StatusBar style="auto" />
-    </View>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="TasksOverview" component={TasksOverview} />
+          <Stack.Screen name="ManageTask" component={ManageTask} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
