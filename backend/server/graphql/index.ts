@@ -1,8 +1,8 @@
 import type http from 'http';
 import { ApolloServer, BaseContext } from '@apollo/server';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
-import { resolvers } from './resolvers';
-import { typeDefs } from './typeDefs';
+import { resolvers } from './resolvers/index.js';
+import { typeDefs } from './typeDefs.js';
 
 export interface MyContext extends BaseContext {}
 

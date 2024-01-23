@@ -1,7 +1,6 @@
 import gql from 'graphql-tag';
 import { taskTypes } from './types/index.js';
-
-export const typeDefs = gql`
+export const typeDefs = gql `
   ${taskTypes}
 
   type Query {
