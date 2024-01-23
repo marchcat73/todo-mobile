@@ -21,3 +21,51 @@ export const GET_FILTRED_TASKS_LIST = gql`
     }
   }
 `;
+
+export const CREATE_TASK = gql`
+  mutation CreateTask(
+    $name: String!
+    $taskDate: String!
+    $status: StatusTypes!
+  ) {
+    createTask(name: $name, taskDate: $taskDate, status: $status) {
+      _id
+      name
+      taskDate
+      status
+    }
+  }
+`;
+
+export const GET_TASK_BY_ID = gql`
+  query TaskById($_id: ID!) {
+    taskById(_id: $_id) {
+      _id
+      name
+      status
+      taskDate
+    }
+  }
+`;
+
+export const DELETE_TASK = gql`
+  mutation DeleteTask($_id: ID!) {
+    deleteTask(_id: $_id)
+  }
+`;
+
+export const UPDATE_TASK = gql`
+  mutation UpdateTask(
+    $id: ID!
+    $name: String
+    $taskDate: String
+    $status: StatusTypes
+  ) {
+    updateTask(_id: $id, name: $name, taskDate: $taskDate, status: $status) {
+      _id
+      name
+      status
+      taskDate
+    }
+  }
+`;
