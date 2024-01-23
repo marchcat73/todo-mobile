@@ -1,6 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistCache, AsyncStorageWrapper } from 'apollo3-cache-persist';
-import { ApolloClient, ApolloProvider, from, HttpLink } from '@apollo/client';
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  from,
+  HttpLink,
+} from '@apollo/client';
 import { polyfill as polyfillEncoding } from 'react-native-polyfill-globals/src/encoding';
 import { polyfill as polyfillReadableStream } from 'react-native-polyfill-globals/src/readable-stream';
 import { polyfill as polyfillFetch } from 'react-native-polyfill-globals/src/fetch';
@@ -39,11 +45,11 @@ import { GlobalStyles } from './constants/styles';
 //   },
 // });
 
-// const client = new ApolloClient({
-//   uri: baseUrl,
-//   cache,
-//   defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } },
-// });
+const client = new ApolloClient({
+  uri: baseUrl,
+  cache: new InMemoryCache(),
+  // defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } },
+});
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -112,8 +118,8 @@ const TasksOverview = () => {
 
 export default function App() {
   return (
-    <>
-      <StatusBar style="auto" />
+    <ApolloProvider client={client}>
+      <StatusBar style="light" />
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -124,6 +130,6 @@ export default function App() {
           <Stack.Screen name="ManageTask" component={ManageTask} />
         </Stack.Navigator>
       </NavigationContainer>
-    </>
+    </ApolloProvider>
   );
 }
