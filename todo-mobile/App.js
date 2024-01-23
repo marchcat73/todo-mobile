@@ -15,12 +15,12 @@ import TodoList from './components/TodoList';
 // polyfillFetch();
 
 // await before instantiating ApolloClient, else queries might run before the cache is persisted
-(async () => {
-  await persistCache({
-    cache,
-    storage: new AsyncStorageWrapper(AsyncStorage),
-  });
-})();
+// (async () => {
+//   await persistCache({
+//     cache,
+//     storage: new AsyncStorageWrapper(AsyncStorage),
+//   });
+// })();
 
 // const httpLink = new HttpLink({
 //   uri: baseUrl,
@@ -31,20 +31,18 @@ import TodoList from './components/TodoList';
 //   },
 // });
 
-const client = new ApolloClient({
-  uri: baseUrl,
-  cache,
-  defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } },
-});
+// const client = new ApolloClient({
+//   uri: baseUrl,
+//   cache,
+//   defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } },
+// });
 
 export default function App() {
   return (
-    <ApolloProvider client={client}>
-      <View style={styles.container}>
-        <TodoList />
-        <StatusBar style="auto" />
-      </View>
-    </ApolloProvider>
+    <View style={styles.container}>
+      <TodoList />
+      <StatusBar style="auto" />
+    </View>
   );
 }
 
