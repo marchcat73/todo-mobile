@@ -1,11 +1,8 @@
-import { FlatList, Text, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native';
+import TaskItem from './TaskItem';
 
 const renderTaskItem = (itemData) => {
-  return (
-    <Text style={itemData.item.status === 'completed' && styles.textComplete}>
-      {itemData.item.name}
-    </Text>
-  );
+  return <TaskItem {...itemData.item} />;
 };
 
 const TasksList = ({ tasks }) => {
@@ -17,11 +14,5 @@ const TasksList = ({ tasks }) => {
     />
   );
 };
-
-const styles = StyleSheet.create({
-  textComplete: {
-    textDecorationLine: 'line-through',
-  },
-});
 
 export default TasksList;
