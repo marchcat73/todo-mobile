@@ -8,6 +8,7 @@ import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { cache } from './cache';
 import baseUrl from './assets/common/baseUrl';
 import ManageTask from './screens/ManageTask';
@@ -15,6 +16,7 @@ import ActiveTasks from './screens/ActiveTasks';
 import AllTasks from './screens/AllTasks';
 import CompletedTasks from './screens/CompletedTasks';
 import InProgressTasks from './screens/InProgressTasks';
+import { GlobalStyles } from './constants/styles';
 
 // polyfillReadableStream();
 // polyfillEncoding();
@@ -48,11 +50,62 @@ const BottomTabs = createBottomTabNavigator();
 
 const TasksOverview = () => {
   return (
-    <BottomTabs.Navigator>
-      <BottomTabs.Screen name="ActiveTasks" component={ActiveTasks} />
-      <BottomTabs.Screen name="CompletedTasks" component={CompletedTasks} />
-      <BottomTabs.Screen name="InProgressTasks" component={InProgressTasks} />
-      <BottomTabs.Screen name="AllTasks" component={AllTasks} />
+    <BottomTabs.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
+        headerTintColor: '#fff',
+        tabBarStyle: { backgroundColor: GlobalStyles.colors.primary500 },
+        tabBarActiveTintColor: GlobalStyles.colors.accent500,
+      }}
+    >
+      <BottomTabs.Screen
+        name="Active Tasks"
+        component={ActiveTasks}
+        options={{
+          title: 'Active Tasks',
+          tabBarLabel: 'Active',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons
+              name="notifications-active"
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
+        name="In Progress Tasks"
+        component={InProgressTasks}
+        options={{
+          title: 'In Progress Tasks',
+          tabBarLabel: 'In Progress',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="hourglass" size={size} color={color} />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
+        name="Completed Tasks"
+        component={CompletedTasks}
+        options={{
+          title: 'Completed Tasks',
+          tabBarLabel: 'Done',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="checkmark-done" size={size} color={color} />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
+        name="All Tasks"
+        component={AllTasks}
+        options={{
+          title: 'All Tasks',
+          tabBarLabel: 'All',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="calendar" size={size} color={color} />
+          ),
+        }}
+      />
     </BottomTabs.Navigator>
   );
 };
@@ -63,7 +116,11 @@ export default function App() {
       <StatusBar style="auto" />
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="TasksOverview" component={TasksOverview} />
+          <Stack.Screen
+            name="TasksOverview"
+            component={TasksOverview}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen name="ManageTask" component={ManageTask} />
         </Stack.Navigator>
       </NavigationContainer>
