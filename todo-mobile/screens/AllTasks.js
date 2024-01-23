@@ -16,7 +16,6 @@ const AllTasks = () => {
 
   const tasks = (data && data.tasks) || [];
 
-  console.log(tasks);
   return <Text>AllTasks Screen</Text>;
 };
 
