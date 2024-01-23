@@ -7,26 +7,26 @@ import {
   ScrollView,
   TextInput,
 } from 'react-native';
-// import { useQuery, gql } from '@apollo/client';
+import { useQuery, gql } from '@apollo/client';
 // import { useGetTasksList } from '../apollo/actions';
 import Todo from './Todo';
 
 const TodoList = () => {
-  //   const GET_TASKS_LIST = gql`
-  //     query Tasks {
-  //       tasks {
-  //         _id
-  //         name
-  //         status
-  //         taskDate
-  //       }
-  //     }
-  //   `;
-  //   const { data } = useQuery(GET_TASKS_LIST);
+  const GET_TASKS_LIST = gql`
+    query Tasks {
+      tasks {
+        _id
+        name
+        status
+        taskDate
+      }
+    }
+  `;
+  const { data } = useQuery(GET_TASKS_LIST);
 
-  //   const tasks = (data && data.tasks) || [];
+  const tasks = (data && data.tasks) || [];
 
-  //   console.log(tasks);
+  console.log(tasks);
 
   const initListState = [
     {
