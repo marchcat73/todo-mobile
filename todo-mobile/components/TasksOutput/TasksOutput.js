@@ -1,4 +1,5 @@
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { GlobalStyles } from '../../constants/styles';
 import TasksList from './TasksList';
 
 const TasksOutput = ({ loading, error, tasks }) => {
@@ -21,8 +22,7 @@ const TasksOutput = ({ loading, error, tasks }) => {
   return (
     <>
       {tasks.length > 0 ? (
-        <View>
-          <Text>Tasks not 0</Text>
+        <View style={styles.container}>
           <TasksList tasks={tasks} />
         </View>
       ) : (
@@ -33,5 +33,15 @@ const TasksOutput = ({ loading, error, tasks }) => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 24,
+    paddingTop: 24,
+    paddingBottom: 0,
+    backgroundColor: GlobalStyles.colors.primary700,
+  },
+});
 
 export default TasksOutput;
