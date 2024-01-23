@@ -47,7 +47,7 @@ import { GlobalStyles } from './constants/styles';
 
 const client = new ApolloClient({
   uri: baseUrl,
-  cache: new InMemoryCache(),
+  cache,
   // defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } },
 });
 

@@ -1,11 +1,7 @@
-import { Text, View, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 
 const TasksList = ({ tasks }) => {
-  return (
-    <View>
-      <FlatList />
-    </View>
-  );
+  return <FlatList />;
 };
 
 export default TasksList;
