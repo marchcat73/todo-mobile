@@ -27,6 +27,19 @@ export const tasksQueris = {
       throw new GraphQLError(`GraphQLError ${error}`);
     }
   },
+
+  taskById: async (
+    _root: undefined,
+    { _id }: { _id: string },
+    ctx,
+    _info,
+  ): Promise<TaskResponse> => {
+    try {
+      return await ctx.models.Task.getById(_id);
+    } catch (error) {
+      throw new GraphQLError(`GraphQLError ${error}`);
+    }
+  },
 };
 
 export const tasksMutations = {
@@ -81,14 +94,14 @@ export const tasksMutations = {
     { _id }: { _id: string },
     ctx,
     _info,
-  ): Promise<any> => {
+  ): Promise<boolean | any> => {
     try {
       const deletedTask = await ctx.models.Task.delete(_id);
 
       if (!deletedTask) {
         throw new GraphQLError(`GraphQLError not server response`);
       } else {
-        return deletedTask;
+        return true;
       }
     } catch (error) {
       throw new GraphQLError(`GraphQLError ${error}`);

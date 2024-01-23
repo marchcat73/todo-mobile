@@ -93,6 +93,19 @@ class Task {
       throw new Error(`Error ${error}`);
     }
   }
+
+  async getById(_id: string): Promise<TaskResponse> {
+    try {
+      const res = await this.Model.findById(_id);
+      if (!res) {
+        throw new Error('Tasks not found');
+      }
+      return res;
+    } catch (error) {
+      console.error(error);
+      throw new Error(`Error ${error}`);
+    }
+  }
 }
 
 export { Task };
