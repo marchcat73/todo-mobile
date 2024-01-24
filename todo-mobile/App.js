@@ -132,13 +132,25 @@ export default function App() {
     <ApolloProvider client={client}>
       <StatusBar style="light" />
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
+            headerTintColor: '#fff',
+          }}
+        >
           <Stack.Screen
             name="TasksOverview"
             component={TasksOverview}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="ManageTask" component={ManageTask} />
+          <Stack.Screen
+            name="ManageTask"
+            component={ManageTask}
+            options={{
+              // title: 'Manage Task',
+              presentation: 'modal',
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>
