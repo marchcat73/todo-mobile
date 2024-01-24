@@ -1,12 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistCache, AsyncStorageWrapper } from 'apollo3-cache-persist';
-import {
-  ApolloClient,
-  ApolloProvider,
-  InMemoryCache,
-  from,
-  HttpLink,
-} from '@apollo/client';
+import { ApolloClient, ApolloProvider, from, HttpLink } from '@apollo/client';
 import { polyfill as polyfillEncoding } from 'react-native-polyfill-globals/src/encoding';
 import { polyfill as polyfillReadableStream } from 'react-native-polyfill-globals/src/readable-stream';
 import { polyfill as polyfillFetch } from 'react-native-polyfill-globals/src/fetch';
@@ -37,23 +31,18 @@ polyfillFetch();
   });
 })();
 
+// https://www.apollographql.com/docs/react/integrations/react-native/
 const httpLink = new HttpLink({
   uri: baseUrl,
-  credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
-  headers: { 'Apollo-Require-Preflight': 'true' },
   fetchOptions: {
     reactNative: { textStreaming: true },
   },
 });
 
 const client = new ApolloClient({
-  uri: baseUrl,
-  // link: from[httpLink],
+  link: from([httpLink]),
   cache,
   defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } },
-  fetchOptions: {
-    reactNative: { textStreaming: true },
-  },
 });
 
 const Stack = createNativeStackNavigator();
