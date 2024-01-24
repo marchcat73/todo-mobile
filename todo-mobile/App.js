@@ -22,6 +22,7 @@ import ActiveTasks from './screens/ActiveTasks';
 import AllTasks from './screens/AllTasks';
 import CompletedTasks from './screens/CompletedTasks';
 import InProgressTasks from './screens/InProgressTasks';
+import IconButton from './components/UI/IconButton';
 import { GlobalStyles } from './constants/styles';
 
 // polyfillReadableStream();
@@ -57,12 +58,22 @@ const BottomTabs = createBottomTabNavigator();
 const TasksOverview = () => {
   return (
     <BottomTabs.Navigator
-      screenOptions={{
+      screenOptions={({ navigation }) => ({
         headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
         headerTintColor: '#fff',
         tabBarStyle: { backgroundColor: GlobalStyles.colors.primary500 },
         tabBarActiveTintColor: GlobalStyles.colors.accent500,
-      }}
+        headerRight: ({ tintColor }) => (
+          <IconButton
+            icon="add-alarm"
+            size={24}
+            color={tintColor}
+            onPress={() => {
+              navigation.navigate('ManageTask');
+            }}
+          />
+        ),
+      })}
     >
       <BottomTabs.Screen
         name="Active Tasks"
