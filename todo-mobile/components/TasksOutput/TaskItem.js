@@ -1,7 +1,8 @@
 import { StyleSheet, Pressable, View, Text } from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
 
-const TaskItem = ({ name, taskDate, status }) => {
+const TaskItem = ({ _id, name, taskDate, status }) => {
+  console.log(_id);
   return (
     <Pressable>
       <View style={styles.taskItem}>
@@ -69,6 +70,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   statusContainer: {
+    width: '30%',
     paddingHorizontal: 12,
     paddingVertical: 4,
     backgroundColor: GlobalStyles.colors.gray700,
