@@ -9,14 +9,8 @@ const ManageTask = ({ route, navigation }) => {
   const editedTaskId = route.params?.taskId;
   const isEditing = !!editedTaskId;
   const [deleteTask] = useDeleteTask();
-  const [
-    createTask,
-    { data: dataCreate, loading: loadingCreate, error: errorCreate },
-  ] = useCreateTask();
-  const [
-    updateTask,
-    { data: dataUpdate, loading: loadingUpdate, error: errorUpdate },
-  ] = useUpdateTask();
+  const [createTask] = useCreateTask();
+  const [updateTask] = useUpdateTask();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -51,7 +45,7 @@ const ManageTask = ({ route, navigation }) => {
         variables: {
           id: editedTaskId,
           name: 'Test update',
-          taskDate: '25-01-2024',
+          taskDate: new Date(),
           status: 'completed',
         },
       });
@@ -59,14 +53,14 @@ const ManageTask = ({ route, navigation }) => {
       createTask({
         variables: {
           name: 'New todo test',
-          taskDate: '24-01-2024',
+          taskDate: new Date(),
           status: 'inProgress',
         },
       });
     }
     navigation.goBack();
   };
-  console.log(loadingCreate);
+
   return (
     <View style={styles.container}>
       <View style={styles.buttons}>
