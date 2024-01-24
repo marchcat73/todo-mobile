@@ -44,9 +44,9 @@ const ManageTask = ({ route, navigation }) => {
       updateTask({
         variables: {
           id: editedTaskId,
-          name: 'Test update',
+          name: 'Todo activated',
           taskDate: new Date(),
-          status: 'completed',
+          status: 'active',
         },
       });
     } else {

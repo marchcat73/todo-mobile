@@ -5,16 +5,16 @@ import TasksList from './TasksList';
 const TasksOutput = ({ loading, error, tasks }) => {
   if (error) {
     return (
-      <View>
-        <Text>Sorry, there was an error</Text>
+      <View style={styles.container}>
+        <Text style={styles.infoText}>Sorry, there was an error</Text>
       </View>
     );
   }
 
   if (loading) {
     return (
-      <View>
-        <Text>Loading...</Text>
+      <View style={styles.container}>
+        <Text style={styles.infoText}>Loading...</Text>
       </View>
     );
   }
@@ -26,8 +26,8 @@ const TasksOutput = ({ loading, error, tasks }) => {
           <TasksList tasks={tasks} />
         </View>
       ) : (
-        <View>
-          <Text>Tasks Not Found</Text>
+        <View style={styles.container}>
+          <Text style={styles.infoText}>Tasks Not Found</Text>
         </View>
       )}
     </>
@@ -41,6 +41,12 @@ const styles = StyleSheet.create({
     paddingTop: 24,
     paddingBottom: 0,
     backgroundColor: GlobalStyles.colors.primary700,
+  },
+  infoText: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center',
+    marginTop: 32,
   },
 });
 
