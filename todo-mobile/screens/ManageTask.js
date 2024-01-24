@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react';
-import { Alert, StyleSheet, TextInput, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import IconButton from '../components/UI/IconButton';
 import { useDeleteTask, useCreateTask, useUpdateTask } from '../apollo/actions';
 import { GlobalStyles } from '../constants/styles';
