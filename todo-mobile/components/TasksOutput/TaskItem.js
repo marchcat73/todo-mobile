@@ -1,9 +1,19 @@
 import { StyleSheet, Pressable, View, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { GlobalStyles } from '../../constants/styles';
 
-const TaskItem = ({ name, taskDate, status }) => {
+const TaskItem = ({ _id, name, taskDate, status }) => {
+  const navigation = useNavigation();
+
+  const taskPressHandler = () => {
+    navigation.navigate('ManageTask');
+  };
+
   return (
-    <Pressable>
+    <Pressable
+      onPress={taskPressHandler}
+      style={({ pressed }) => pressed && styles.pressed}
+    >
       <View style={styles.taskItem}>
         <View>
           <Text
@@ -35,6 +45,9 @@ const TaskItem = ({ name, taskDate, status }) => {
 };
 
 const styles = StyleSheet.create({
+  pressed: {
+    opacity: 0.75,
+  },
   textComplete: {
     textDecorationLine: 'line-through',
   },
@@ -69,6 +82,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   statusContainer: {
+    width: '30%',
     paddingHorizontal: 12,
     paddingVertical: 4,
     backgroundColor: GlobalStyles.colors.gray700,
