@@ -15,11 +15,16 @@ export const cache = new InMemoryCache({
             return taskStateVar();
           },
         },
-        // tasks: {
-        // 	merge(_existing, incoming) {
-        // 		return incoming
-        // 	}
-        // }
+        tasks: {
+          merge(_existing, incoming) {
+            return incoming;
+          },
+        },
+        tasksFilter: {
+          merge(_existing, incoming) {
+            return incoming;
+          },
+        },
       },
     },
   },
