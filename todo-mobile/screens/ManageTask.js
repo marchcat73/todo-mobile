@@ -4,6 +4,7 @@ import IconButton from '../components/UI/IconButton';
 import { useDeleteTask, useCreateTask, useUpdateTask } from '../apollo/actions';
 import { GlobalStyles } from '../constants/styles';
 import Button from '../components/UI/Button';
+import TaskForm from '../components/ManageTasks/TaskForm';
 
 const ManageTask = ({ route, navigation }) => {
   const editedTaskId = route.params?.taskId;
@@ -63,6 +64,7 @@ const ManageTask = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
+      <TaskForm />
       <View style={styles.buttons}>
         <Button style={styles.button} mode="flat" onPress={cancelHandler}>
           Cancel
