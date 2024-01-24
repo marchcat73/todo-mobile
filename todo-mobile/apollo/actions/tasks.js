@@ -7,19 +7,22 @@ import {
   UPDATE_TASK,
 } from '../queries/tasks';
 
-export const useGetTasksList = () => useQuery(GET_TASKS_LIST);
+export const useGetTasksList = () =>
+  useQuery(GET_TASKS_LIST, {
+    pollInterval: 500,
+  });
 
 export const useCreateTask = () =>
   useMutation(CREATE_TASK, {
-    refetchQueries: [GET_TASKS_LIST],
+    // refetchQueries: [GET_TASKS_LIST],
   });
 
 export const useDeleteTask = () =>
   useMutation(DELETE_TASK, {
-    refetchQueries: [GET_TASKS_LIST],
+    // refetchQueries: [GET_TASKS_LIST],
   });
 
 export const useUpdateTask = () =>
   useMutation(UPDATE_TASK, {
-    refetchQueries: [GET_TASKS_LIST],
+    // refetchQueries: [GET_TASKS_LIST],
   });

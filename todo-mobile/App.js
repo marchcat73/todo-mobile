@@ -25,31 +25,35 @@ import InProgressTasks from './screens/InProgressTasks';
 import IconButton from './components/UI/IconButton';
 import { GlobalStyles } from './constants/styles';
 
-// polyfillReadableStream();
-// polyfillEncoding();
-// polyfillFetch();
+polyfillReadableStream();
+polyfillEncoding();
+polyfillFetch();
 
 // await before instantiating ApolloClient, else queries might run before the cache is persisted
-// (async () => {
-//   await persistCache({
-//     cache,
-//     storage: new AsyncStorageWrapper(AsyncStorage),
-//   });
-// })();
+(async () => {
+  await persistCache({
+    cache,
+    storage: new AsyncStorageWrapper(AsyncStorage),
+  });
+})();
 
-// const httpLink = new HttpLink({
-//   uri: baseUrl,
-//   credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
-//   headers: { 'Apollo-Require-Preflight': 'true' },
-//   fetchOptions: {
-//     reactNative: { textStreaming: true },
-//   },
-// });
+const httpLink = new HttpLink({
+  uri: baseUrl,
+  credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
+  headers: { 'Apollo-Require-Preflight': 'true' },
+  fetchOptions: {
+    reactNative: { textStreaming: true },
+  },
+});
 
 const client = new ApolloClient({
   uri: baseUrl,
+  // link: from[httpLink],
   cache,
-  // defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } },
+  defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } },
+  fetchOptions: {
+    reactNative: { textStreaming: true },
+  },
 });
 
 const Stack = createNativeStackNavigator();
@@ -147,7 +151,6 @@ export default function App() {
             name="ManageTask"
             component={ManageTask}
             options={{
-              // title: 'Manage Task',
               presentation: 'modal',
             }}
           />

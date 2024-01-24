@@ -12,7 +12,7 @@ export const taskTypes = `
 
   input TaskInput {
     ${TaskFields}
-    status: StatusTypes!
+    status: StatusTypes
   }
 
   input TaskUpdateInput {

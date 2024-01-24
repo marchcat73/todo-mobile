@@ -12,7 +12,7 @@ export const GET_TASKS_LIST = gql`
 `;
 
 export const GET_FILTRED_TASKS_LIST = gql`
-  query TasksFilter($status: StatusTypes) {
+  query TasksFilter($status: StatusTypes!) {
     tasksFilter(status: $status) {
       _id
       name
@@ -49,8 +49,8 @@ export const GET_TASK_BY_ID = gql`
 `;
 
 export const DELETE_TASK = gql`
-  mutation DeleteTask($_id: ID!) {
-    deleteTask(_id: $_id)
+  mutation DeleteTask($id: ID!) {
+    deleteTask(id: $id)
   }
 `;
 

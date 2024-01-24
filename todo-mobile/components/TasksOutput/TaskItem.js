@@ -6,7 +6,9 @@ const TaskItem = ({ _id, name, taskDate, status }) => {
   const navigation = useNavigation();
 
   const taskPressHandler = () => {
-    navigation.navigate('ManageTask');
+    navigation.navigate('ManageTask', {
+      taskId: _id,
+    });
   };
 
   return (
