@@ -29,7 +29,7 @@ class Task {
 
   async findAndUpdate(
     _id: string,
-    data: Omit<TaskUpdateArgs, '_id'>,
+    data: Omit<TaskUpdateArgs, 'id'>,
   ): Promise<TaskResponse> {
     if (!isValidObjectId(_id)) {
       throw new Error('Task not found');

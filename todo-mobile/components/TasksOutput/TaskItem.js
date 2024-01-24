@@ -1,5 +1,6 @@
 import { StyleSheet, Pressable, View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { format } from 'date-fns';
 import { GlobalStyles } from '../../constants/styles';
 
 const TaskItem = ({ _id, name, taskDate, status }) => {
@@ -27,7 +28,7 @@ const TaskItem = ({ _id, name, taskDate, status }) => {
           >
             {name}
           </Text>
-          <Text style={styles.textBase}>{taskDate}</Text>
+          <Text style={styles.textBase}>{format(taskDate, 'yyyy-MM-dd')}</Text>
         </View>
         <View style={styles.statusContainer}>
           <Text

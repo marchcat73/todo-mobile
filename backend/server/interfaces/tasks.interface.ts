@@ -19,7 +19,7 @@ export interface TaskResponse extends TaskFields {
 }
 
 export interface TaskUpdateArgs {
-  _id: string;
+  id: string;
   name?: string;
   taskDate?: string;
   status?: StatusTypes;

@@ -38,8 +38,8 @@ export const CREATE_TASK = gql`
 `;
 
 export const GET_TASK_BY_ID = gql`
-  query TaskById($_id: ID!) {
-    taskById(_id: $_id) {
+  query TaskById($id: ID!) {
+    taskById(id: $id) {
       _id
       name
       status
@@ -61,7 +61,7 @@ export const UPDATE_TASK = gql`
     $taskDate: String
     $status: StatusTypes
   ) {
-    updateTask(_id: $id, name: $name, taskDate: $taskDate, status: $status) {
+    updateTask(id: $id, name: $name, taskDate: $taskDate, status: $status) {
       _id
       name
       status

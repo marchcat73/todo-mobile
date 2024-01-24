@@ -1,7 +1,7 @@
 import { useLayoutEffect } from 'react';
 import { Alert, StyleSheet, Text, View } from 'react-native';
 import IconButton from '../components/UI/IconButton';
-import { useDeleteTask } from '../apollo/actions';
+import { useDeleteTask, useCreateTask, useUpdateTask } from '../apollo/actions';
 import { GlobalStyles } from '../constants/styles';
 import Button from '../components/UI/Button';
 
@@ -9,6 +9,8 @@ const ManageTask = ({ route, navigation }) => {
   const editedTaskId = route.params?.taskId;
   const isEditing = !!editedTaskId;
   const [deleteTask] = useDeleteTask();
+  const [createTask] = useCreateTask();
+  const [updateTask] = useUpdateTask();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -38,6 +40,24 @@ const ManageTask = ({ route, navigation }) => {
   };
 
   const confirmHandler = () => {
+    if (isEditing) {
+      updateTask({
+        variables: {
+          id: editedTaskId,
+          name: 'Todo activated',
+          taskDate: new Date(),
+          status: 'active',
+        },
+      });
+    } else {
+      createTask({
+        variables: {
+          name: 'New todo test',
+          taskDate: new Date(),
+          status: 'inProgress',
+        },
+      });
+    }
     navigation.goBack();
   };
 
