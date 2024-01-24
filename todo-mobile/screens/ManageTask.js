@@ -16,7 +16,9 @@ const ManageTask = ({ route, navigation }) => {
     });
   }, [navigation, isEditing]);
 
-  const cancelHandler = () => {};
+  const cancelHandler = () => {
+    navigation.goBack();
+  };
 
   const deleteTaskHandler = () => {
     Alert.alert('The task will be deleted!', 'The task will be deleted!', [
@@ -27,12 +29,17 @@ const ManageTask = ({ route, navigation }) => {
       },
       {
         text: 'OK',
-        onPress: () => deleteTask({ variables: { id: editedTaskId } }),
+        onPress: () => {
+          deleteTask({ variables: { id: editedTaskId } });
+          navigation.goBack();
+        },
       },
     ]);
   };
 
-  const confirmHandler = () => {};
+  const confirmHandler = () => {
+    navigation.goBack();
+  };
 
   return (
     <View style={styles.container}>
