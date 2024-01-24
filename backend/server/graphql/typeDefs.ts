@@ -6,7 +6,7 @@ export const typeDefs = gql`
 
   type Query {
     tasks: [TaskResponse]
-    tasksFilter(status: StatusTypes): [TaskResponse]
+    tasksFilter(status: StatusTypes!): [TaskResponse]
     taskById(_id: ID!): TaskResponse
   }
 
@@ -14,7 +14,7 @@ export const typeDefs = gql`
     createTask(
       name: String!
       taskDate: String!
-      status: StatusTypes!
+      status: StatusTypes
     ): TaskResponse!
     updateTask(
       _id: ID!
@@ -22,6 +22,6 @@ export const typeDefs = gql`
       taskDate: String
       status: StatusTypes
     ): TaskResponse!
-    deleteTask(_id: ID!): Boolean
+    deleteTask(id: ID!): Boolean
   }
 `;

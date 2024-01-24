@@ -3,6 +3,8 @@ import {
   StatusTypes,
   TaskFields,
   TaskResponse,
+  TaskCreateArgs,
+  TaskUpdateArgs,
 } from '@app/interfaces/index.js';
 
 class Task {
@@ -11,7 +13,7 @@ class Task {
     this.Model = model;
   }
 
-  async create(data: TaskFields): Promise<TaskResponse> {
+  async create(data: TaskCreateArgs): Promise<TaskResponse> {
     try {
       const res = await this.Model.create(data);
 
@@ -25,7 +27,10 @@ class Task {
     }
   }
 
-  async findAndUpdate(_id: string, data: TaskFields): Promise<TaskResponse> {
+  async findAndUpdate(
+    _id: string,
+    data: Omit<TaskUpdateArgs, '_id'>,
+  ): Promise<TaskResponse> {
     if (!isValidObjectId(_id)) {
       throw new Error('Task not found');
     }

@@ -1,9 +1,9 @@
 import { GraphQLError } from 'graphql';
 import {
   StatusTypes,
-  TaskFields,
   TaskResponse,
   TaskUpdateArgs,
+  TaskCreateArgs,
 } from '@app/interfaces';
 
 export const tasksQuery = {
@@ -50,7 +50,7 @@ export const tasksQuery = {
 export const tasksMutation = {
   createTask: async (
     _root: undefined,
-    { name, taskDate, status }: TaskFields,
+    { name, taskDate, status }: TaskCreateArgs,
     ctx,
     _info,
   ): Promise<TaskResponse> => {
@@ -96,12 +96,12 @@ export const tasksMutation = {
 
   deleteTask: async (
     _root: undefined,
-    { _id }: { _id: string },
+    { id }: { id: string },
     ctx,
     _info,
   ): Promise<boolean | any> => {
     try {
-      const deletedTask = await ctx.models.Task.delete(_id);
+      const deletedTask = await ctx.models.Task.delete(id);
 
       if (!deletedTask) {
         throw new GraphQLError(`GraphQLError not server response`);

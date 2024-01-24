@@ -5,6 +5,7 @@ import TasksOutput from '../components/TasksOutput/TasksOutput';
 const InProgressTasks = () => {
   const { loading, error, data } = useQuery(GET_FILTRED_TASKS_LIST, {
     variables: { status: 'inProgress' },
+    pollInterval: 500,
   });
   const tasks = (data && data.tasksFilter) || [];
   return <TasksOutput loading={loading} error={error} tasks={tasks} />;

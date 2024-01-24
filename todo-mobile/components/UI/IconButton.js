@@ -2,16 +2,18 @@ import { Pressable, View, StyleSheet } from 'react-native';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
 function IconButton({ icon, size, color, onPress }) {
-  const materialIconsArr = ['add-alarm'];
-  const ioIconsArr = [];
+  const isMaterialIcons = ['add-alarm'].includes(icon);
+  const isIoIcons = ['trash'].includes(icon);
   return (
     <Pressable
       onPress={onPress}
       style={({ pressed }) => pressed && styles.pressed}
     >
       <View style={styles.buttonContainer}>
-        <MaterialIcons name={icon} size={size} color={color} />
-        {/* <Ionicons name={icon} size={size} color={color} /> */}
+        {isMaterialIcons && (
+          <MaterialIcons name={icon} size={size} color={color} />
+        )}
+        {isIoIcons && <Ionicons name={icon} size={size} color={color} />}
       </View>
     </Pressable>
   );

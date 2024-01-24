@@ -24,3 +24,9 @@ export interface TaskUpdateArgs {
   taskDate?: string;
   status?: StatusTypes;
 }
+
+export interface TaskCreateArgs {
+  name: string;
+  taskDate: string;
+  status?: StatusTypes;
+}
