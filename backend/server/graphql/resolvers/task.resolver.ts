@@ -35,12 +35,12 @@ export const tasksQuery = {
 
   taskById: async (
     _root: undefined,
-    { _id }: { _id: string },
+    { id }: { id: string },
     ctx,
     _info,
   ): Promise<TaskResponse> => {
     try {
-      return await ctx.models.Task.getById(_id);
+      return await ctx.models.Task.getById(id);
     } catch (error) {
       throw new GraphQLError(`GraphQLError ${error}`);
     }
@@ -73,12 +73,12 @@ export const tasksMutation = {
 
   updateTask: async (
     _root: undefined,
-    { _id, name, taskDate, status }: TaskUpdateArgs,
+    { id, name, taskDate, status }: TaskUpdateArgs,
     ctx,
     _info,
   ): Promise<TaskResponse> => {
     try {
-      const updatedTask = await ctx.models.Task.findAndUpdate(_id, {
+      const updatedTask = await ctx.models.Task.findAndUpdate(id, {
         name,
         taskDate,
         status,

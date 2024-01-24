@@ -7,7 +7,7 @@ export const typeDefs = gql`
   type Query {
     tasks: [TaskResponse]
     tasksFilter(status: StatusTypes!): [TaskResponse]
-    taskById(_id: ID!): TaskResponse
+    taskById(id: ID!): TaskResponse
   }
 
   type Mutation {
@@ -17,7 +17,7 @@ export const typeDefs = gql`
       status: StatusTypes
     ): TaskResponse!
     updateTask(
-      _id: ID!
+      id: ID!
       name: String
       taskDate: String
       status: StatusTypes
