@@ -1,10 +1,27 @@
 import { useLayoutEffect } from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
 import IconButton from '../components/UI/IconButton';
-import { useDeleteTask, useCreateTask, useUpdateTask } from '../apollo/actions';
+import {
+  useDeleteTask,
+  useCreateTask,
+  useUpdateTask,
+  useGetTaskById,
+} from '../apollo/actions';
 import { GlobalStyles } from '../constants/styles';
 import Button from '../components/UI/Button';
 import TaskForm from '../components/ManageTasks/TaskForm';
+
+const useInitialData = (id) => {
+  const { data } = useGetTaskById({
+    variables: { id },
+  });
+
+  const taskItem = (data && data.taskById) || null;
+
+  return {
+    taskItem,
+  };
+};
 
 const ManageTask = ({ route, navigation }) => {
   const editedTaskId = route.params?.taskId;
@@ -12,6 +29,8 @@ const ManageTask = ({ route, navigation }) => {
   const [deleteTask] = useDeleteTask();
   const [createTask] = useCreateTask();
   const [updateTask] = useUpdateTask();
+
+  const { taskItem } = isEditing && useInitialData(editedTaskId);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -64,7 +83,7 @@ const ManageTask = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TaskForm />
+      <TaskForm initData={taskItem} />
       <View style={styles.buttons}>
         <Button style={styles.button} mode="flat" onPress={cancelHandler}>
           Cancel

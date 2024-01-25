@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { format } from 'date-fns';
 import Input from './Input';
 import Button from '../UI/Button';
 import { GlobalStyles } from '../../constants/styles';
 
-const TaskForm = () => {
+const TaskForm = ({ initData }) => {
   const [selectedStatus, setSelectedStatus] = useState();
   const [name, setName] = useState('');
-  const [date, setDate] = useState(new Date(1598051730000));
+  const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
@@ -22,13 +23,27 @@ const TaskForm = () => {
     setShow(true);
   };
 
-  const nameChangedHandler = () => {};
+  const nameChangedHandler = () => {
+    setName('dddd');
+  };
+
+  useLayoutEffect(() => {
+    if (initData) {
+      const { name, taskDate, status } = initData;
+
+      setName(name);
+      setDate(new Date(taskDate));
+      setSelectedStatus(status);
+    }
+  }, []);
 
   return (
-    <View>
+    <View style={styles.form}>
+      <Text style={styles.title}>Что купить</Text>
       <View>
         <Input
           label="Todo"
+          value={name}
           textInputConfig={{
             onChangeText: nameChangedHandler,
             placeholder: 'Enter Todo',
@@ -45,7 +60,7 @@ const TaskForm = () => {
           >
             <Picker.Item label="Active" value="active" style={styles.picker} />
             <Picker.Item
-              label="In Progress"
+              label="InProgress"
               value="inProgress"
               style={styles.picker}
             />
@@ -60,7 +75,7 @@ const TaskForm = () => {
 
       <View style={styles.dateContainer}>
         <Text style={styles.selectedDate}>
-          Selected Date: {date.toLocaleString()}
+          Selected Date: {format(date, 'yyyy-MM-dd')}
         </Text>
         <Button onPress={showDatepicker}>Select date</Button>
 
@@ -81,6 +96,16 @@ const TaskForm = () => {
 };
 
 const styles = StyleSheet.create({
+  form: {
+    marginTop: 40,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginVertical: 24,
+    textAlign: 'center',
+  },
   pickerContainer: {
     justifyContent: 'center',
     backgroundColor: GlobalStyles.colors.primary100,

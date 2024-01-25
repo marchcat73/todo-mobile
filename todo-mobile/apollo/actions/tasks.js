@@ -5,12 +5,15 @@ import {
   CREATE_TASK,
   DELETE_TASK,
   UPDATE_TASK,
+  GET_TASK_BY_ID,
 } from '../queries/tasks';
 
 export const useGetTasksList = () =>
   useQuery(GET_TASKS_LIST, {
     pollInterval: 500,
   });
+
+export const useGetTaskById = (options) => useQuery(GET_TASK_BY_ID, options);
 
 export const useCreateTask = () =>
   useMutation(CREATE_TASK, {
