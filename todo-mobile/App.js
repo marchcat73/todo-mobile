@@ -10,7 +10,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { cache } from './cache';
-import baseUrl from './assets/common/baseUrl';
+import baseUrl from './constants/baseUrl';
 import ManageTask from './screens/ManageTask';
 import ActiveTasks from './screens/ActiveTasks';
 import AllTasks from './screens/AllTasks';
