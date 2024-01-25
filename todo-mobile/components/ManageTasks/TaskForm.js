@@ -7,7 +7,7 @@ import Input from './Input';
 import Button from '../UI/Button';
 import { GlobalStyles } from '../../constants/styles';
 
-const TaskForm = ({ initData }) => {
+const TaskForm = ({ initData, onCancel, onSubmit, submitButtonLabel }) => {
   const [selectedStatus, setSelectedStatus] = useState();
   const [name, setName] = useState('');
   const [date, setDate] = useState(new Date());
@@ -23,8 +23,8 @@ const TaskForm = ({ initData }) => {
     setShow(true);
   };
 
-  const nameChangedHandler = () => {
-    setName('dddd');
+  const nameChangedHandler = (enteredName) => {
+    setName(enteredName);
   };
 
   useLayoutEffect(() => {
@@ -35,7 +35,17 @@ const TaskForm = ({ initData }) => {
       setDate(new Date(taskDate));
       setSelectedStatus(status);
     }
-  }, []);
+  }, [initData]);
+
+  function submitHandler() {
+    const taskData = {
+      name: name,
+      taskDate: date,
+      status: selectedStatus,
+    };
+
+    onSubmit(taskData);
+  }
 
   return (
     <View style={styles.form}>
@@ -49,6 +59,7 @@ const TaskForm = ({ initData }) => {
             placeholder: 'Enter Todo',
             multiline: true,
             autoCorrect: false,
+            value: name,
           }}
         />
         <Text style={styles.label}>Status</Text>
@@ -91,6 +102,14 @@ const TaskForm = ({ initData }) => {
           />
         )}
       </View>
+      <View style={styles.buttons}>
+        <Button style={styles.button} mode="flat" onPress={onCancel}>
+          Cancel
+        </Button>
+        <Button style={styles.button} onPress={submitHandler}>
+          {submitButtonLabel}
+        </Button>
+      </View>
     </View>
   );
 };
@@ -129,6 +148,15 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: GlobalStyles.colors.primary100,
     marginBottom: 4,
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    minWidth: 120,
+    marginHorizontal: 8,
   },
 });
 

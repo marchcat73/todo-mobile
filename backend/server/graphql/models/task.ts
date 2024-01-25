@@ -66,7 +66,7 @@ class Task {
     }
     try {
       const res = await this.Model.findByIdAndDelete(_id);
-      console.log('delete', res);
+      // console.log('delete', res);
       if (!res) {
         throw new Error('Task not deleted');
       }

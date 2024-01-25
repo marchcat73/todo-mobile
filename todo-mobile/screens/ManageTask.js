@@ -8,7 +8,6 @@ import {
   useGetTaskById,
 } from '../apollo/actions';
 import { GlobalStyles } from '../constants/styles';
-import Button from '../components/UI/Button';
 import TaskForm from '../components/ManageTasks/TaskForm';
 
 const useInitialData = (id) => {
@@ -59,22 +58,23 @@ const ManageTask = ({ route, navigation }) => {
     ]);
   };
 
-  const confirmHandler = () => {
+  const confirmHandler = (taskData) => {
+    const { name, taskDate, status } = taskData;
     if (isEditing) {
       updateTask({
         variables: {
           id: editedTaskId,
-          name: 'Todo activated',
-          taskDate: new Date(),
-          status: 'active',
+          name: name,
+          taskDate: taskDate,
+          status: status,
         },
       });
     } else {
       createTask({
         variables: {
-          name: 'New todo test',
-          taskDate: new Date(),
-          status: 'inProgress',
+          name: name,
+          taskDate: taskDate,
+          status: status,
         },
       });
     }
@@ -83,15 +83,20 @@ const ManageTask = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TaskForm initData={taskItem} />
-      <View style={styles.buttons}>
+      <TaskForm
+        initData={taskItem}
+        onCancel={cancelHandler}
+        submitButtonLabel={isEditing ? 'Update' : 'Add'}
+        onSubmit={confirmHandler}
+      />
+      {/* <View style={styles.buttons}>
         <Button style={styles.button} mode="flat" onPress={cancelHandler}>
           Cancel
         </Button>
         <Button style={styles.button} onPress={confirmHandler}>
           {isEditing ? 'Update' : 'Add'}
         </Button>
-      </View>
+      </View> */}
       {isEditing && (
         <View style={styles.deleteContainer}>
           <IconButton
@@ -111,15 +116,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     backgroundColor: GlobalStyles.colors.primary800,
-  },
-  buttons: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  button: {
-    minWidth: 120,
-    marginHorizontal: 8,
   },
   deleteContainer: {
     marginTop: 16,
