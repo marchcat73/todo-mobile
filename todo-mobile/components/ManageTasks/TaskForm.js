@@ -3,6 +3,8 @@ import { StyleSheet, View, Text } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { format } from 'date-fns';
+import { useReactiveVar } from '@apollo/client';
+import { taskStateVar } from '../../cache';
 import Input from './Input';
 import Button from '../UI/Button';
 import { GlobalStyles } from '../../constants/styles';
@@ -12,6 +14,8 @@ const TaskForm = ({ initData, onCancel, onSubmit, submitButtonLabel }) => {
   const [name, setName] = useState('');
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
+  const taskState = useReactiveVar(taskStateVar);
+  console.log(taskState);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
